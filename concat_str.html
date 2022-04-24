@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>字符串拼接</title>
+    <style>
+      .form-item {
+        margin-bottom: 10px;
+      }
+
+      .label {
+        display: inline-block;
+        width: 100px;
+      }
+
+      #submit {
+        width: 150px;
+        height: 40px;
+      }
+
+      #result-list {
+        line-height: 1.4;
+        padding: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <form name="mainf" onsubmit="return formSubmit()">
+      <div class="form-item">
+        <label for="version" class="label">版本号</label>
+        <input
+          type="text"
+          placeholder="请输入版本类型"
+          name="version"
+          id="version"
+          required
+        />
+      </div>
+      <div class="form-item">
+        <label for="date" class="label">日期</label>
+        <input
+          type="text"
+          placeholder="请输入日期"
+          name="date"
+          id="date"
+          required
+        />
+      </div>
+      <!-- <div class="form-item">
+        <label for="type" class="label">版本类型</label>
+        <input
+          type="text"
+          placeholder="请输入版本类型"
+          name="type"
+          id="type"
+          required
+        />
+      </div> -->
+      <div>
+        <button type="submit" id="submit">生成</button>
+      </div>
+    </form>
+    <div id="result-list"></div>
+
+    <script>
+      function formSubmit() {
+        const mainForm = document.forms['mainf']
+        const resList = document.getElementById('result-list')
+        const typeList = ['R', 'T', 'D']
+
+        if (mainForm) {
+          const date = mainForm['date'].value
+          // const type = mainForm['type'].value
+          const version = mainForm['version'].value
+
+          console.log(date, version)
+
+          let resStr = ''
+
+          for (const type of typeList) {
+            resStr += `${type}版本:<br>`
+            resStr += `${version}.${type}.${date}<br>`
+            resStr += `${version}.${type}.20${date}<br>`
+          }
+
+          resList.innerHTML = resStr
+        }
+
+        return false
+      }
+    </script>
+  </body>
+</html>
